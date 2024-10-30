@@ -20,7 +20,6 @@ export const getAllUsers = async (): Promise<User[]> => {
 
 // Создать нового пользователя
 // Функция для добавления пользователя в БД
-// Функция для добавления пользователя в БД
 export const addUserToDb = async (userData: User): Promise<User> => {
     const { username, email, password } = userData;
     const result = await db.query(
