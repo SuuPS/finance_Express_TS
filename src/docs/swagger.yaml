@@ -1,0 +1,29 @@
+openapi: 3.0.0
+info:
+  title: Finance API
+  version: "1.0.0"
+  description: API для управления финансами, пользователями, товарами и продажами.
+servers:
+  - url: http://localhost:3000/api
+paths:
+  /users:
+    get:
+      summary: Получить всех пользователей
+      tags:
+        - Users
+      responses:
+        '200':
+          description: Успешно получены все пользователи
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    username:
+                      type: string
+                    email:
+                      type: string

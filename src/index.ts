@@ -1,10 +1,9 @@
 // src/index.ts
-
 import express from 'express';
 import bodyParser from 'body-parser';
 import routes from './routes';
 import swaggerUi from 'swagger-ui-express'; // Импортируем Swagger UI
-import swaggerDocs from './config/swaggerConfig';
+import swaggerDocs from './config/swaggerConfig.yaml';
 
 const index = express();
 const PORT = process.env.PORT || 3000;
