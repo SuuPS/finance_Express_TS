@@ -1,5 +1,0 @@
-import YAML from 'yamljs';
-
-const swaggerDocs = YAML.load('./src/docs/swagger.yaml');
-
-export default swaggerDocs;

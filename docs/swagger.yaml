@@ -1,0 +1,6 @@
+openapi: 3.0.0
+info:
+  title: FINANCE EXPRESS TS
+  version: "1.0.0"
+  description: API веб приложение FINANCE EXPRESS для реализации и постпуление услуг и товаров
+paths:
