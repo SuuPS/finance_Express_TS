@@ -4,3 +4,13 @@ info:
   version: "1.0.0"
   description: API веб приложение FINANCE EXPRESS для реализации и постпуление услуг и товаров
 paths:
+  # Подключаем эндпоинты для пользователей
+  /users:
+    $ref: './paths/users.yaml'
+components:
+  schemas:
+    $ref: './components/schemas.yaml'
+  responses:
+    $ref: './components/responses.yaml'
+  parameters:
+    $ref: './components/parameters.yaml'

@@ -3,11 +3,14 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import routes from './routes';
 import swaggerUi from 'swagger-ui-express';
+const fs = require("fs")
+const YAML = require('yaml')
+
+const file  = fs.readFileSync('docs/swagger.yaml', 'utf8')
+const swaggerDocument = YAML.parse(file)
 
 const index = express();
 const PORT = process.env.PORT || 3000;
-
-import {swaggerDocument} from "./utils/swaggerMerger";
 
 // Middleware
 index.use(bodyParser.json());
