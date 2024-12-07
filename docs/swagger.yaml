@@ -6,11 +6,6 @@ info:
 paths:
   # Подключаем эндпоинты для пользователей
   /users:
-    $ref: './paths/users.yaml'
-components:
-  schemas:
-    $ref: './components/schemas.yaml'
-  responses:
-    $ref: './components/responses.yaml'
-  parameters:
-    $ref: './components/parameters.yaml'
+    $ref: './users/users.yaml'
+servers:
+  - url: http://localhost:3000/api

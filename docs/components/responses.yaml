@@ -1,9 +1,0 @@
-BadRequest:
-  description: Invalid request
-  content:
-    application/json:
-      schema:
-        type: object
-        properties:
-          error:
-            type: string

@@ -1,4 +1,4 @@
-// src/models/userModel.ts
+// src/models/user.ts
 import db from '../db';
 
 export interface Assortment {

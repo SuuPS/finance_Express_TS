@@ -1,17 +1,17 @@
 // src/services/userService.ts
 
-import { User } from '../models/userModel';
+import { User } from '../types/user';
 import {
     getUserById,
-    getAllUsersRepositories,
-    createUserInRepository,
-    updateUserInRepository,
-    deleteUserInRepository
+    getAllUsers,
+    createUser,
+    updateUser,
+    deleteUser
 } from '../repositories/userRepository';
 
 // Получить пользователя по ID
 export const getAllUserService = async (): Promise<User[]> => {
-    return getAllUsersRepositories();
+    return getAllUsers();
 };
 
 // Получить пользователя по ID
@@ -21,15 +21,15 @@ export const getUserService = async (id: number): Promise<User | undefined> => {
 
 // Создать нового пользователя
 export const createUserService = async (userData: User): Promise<User> => {
-    return createUserInRepository(userData);
+    return createUser(userData);
 };
 
 // Обновить данные пользователя
 export const updateUserService = async (id: number, updateData: Partial<User>): Promise<User | undefined> => {
-    return updateUserInRepository(id, updateData);
+    return updateUser(id, updateData);
 };
 
 // Удалить пользователя
 export const deleteUserService = async (id: number): Promise<boolean> => {
-    return deleteUserInRepository(id);
+    return deleteUser(id);
 };

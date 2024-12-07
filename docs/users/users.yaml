@@ -1,0 +1,138 @@
+openapi: 3.0.0
+info:
+ title: User API
+ description: API для работы с пользователями
+ version: 1.0.0
+
+paths:
+ /users:
+  get:
+   summary: Получить всех пользователей
+   description: Возвращает список всех пользователей.
+   operationId: getAllUsers
+   tags:
+    - Users
+   responses:
+    '200':
+     description: Список пользователей
+     content:
+      application/json:
+       schema:
+        type: array
+        items:
+         $ref: '#/components/schemas/User'
+
+ /users/{id}:
+  get:
+   summary: Получить пользователя по ID
+   description: Возвращает пользователя по заданному ID.
+   operationId: getUserById
+   tags:
+    - Users
+   parameters:
+    - name: id
+      in: path
+      description: ID пользователя
+      required: true
+      schema:
+       type: integer
+   responses:
+    '200':
+     description: Пользователь найден
+     content:
+      application/json:
+       schema:
+        $ref: '#/components/schemas/User'
+    '404':
+     description: Пользователь не найден
+
+  put:
+   summary: Обновить данные пользователя
+   description: Обновляет данные пользователя по заданному ID.
+   operationId: updateUser
+   tags:
+    - Users
+   parameters:
+    - name: id
+      in: path
+      description: ID пользователя
+      required: true
+      schema:
+       type: integer
+   requestBody:
+    required: true
+    content:
+     application/json:
+      schema:
+       $ref: '#/components/schemas/User'
+   responses:
+    '200':
+     description: Данные пользователя обновлены
+     content:
+      application/json:
+       schema:
+        $ref: '#/components/schemas/User'
+    '404':
+     description: Пользователь не найден
+  
+  delete:
+   summary: Удалить пользователя
+   description: Удаляет пользователя по заданному ID.
+   operationId: deleteUser
+   tags:
+    - Users
+   parameters:
+    - name: id
+      in: path
+      description: ID пользователя
+      required: true
+      schema:
+       type: integer
+   responses:
+    '200':
+     description: Пользователь удален
+    '404':
+     description: Пользователь не найден
+
+ /users:
+  post:
+   summary: Создать нового пользователя
+   description: Создает нового пользователя в базе данных.
+   operationId: createUser
+   tags:
+    - Users
+   requestBody:
+    required: true
+    content:
+     application/json:
+      schema:
+       $ref: '#/components/schemas/User'
+   responses:
+    '201':
+     description: Пользователь успешно создан
+     content:
+      application/json:
+       schema:
+        $ref: '#/components/schemas/User'
+
+components:
+ schemas:
+  User:
+   type: object
+   properties:
+    id:
+     type: integer
+     description: Идентификатор пользователя
+    username:
+     type: string
+     description: Имя пользователя
+    email:
+     type: string
+     description: Электронная почта пользователя
+    password:
+     type: string
+     description: Пароль пользователя
+   required:
+    - username
+    - email
+    - password

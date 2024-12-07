@@ -1,6 +1,0 @@
-UserId:
-  name: userId
-  in: path
-  required: true
-  schema:
-    type: integer

@@ -3,11 +3,9 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import routes from './routes';
 import swaggerUi from 'swagger-ui-express';
-const fs = require("fs")
-const YAML = require('yaml')
 
-const file  = fs.readFileSync('docs/swagger.yaml', 'utf8')
-const swaggerDocument = YAML.parse(file)
+const YAML = require('yamljs');
+const swaggerDocument = YAML.load('docs/swagger.yaml');
 
 const index = express();
 const PORT = process.env.PORT || 3000;
