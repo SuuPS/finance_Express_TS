@@ -1,0 +1,47 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "FINANCE EXPRESS TS",
+    "version": "1.0.0",
+    "description": "API веб приложение FINANCE EXPRESS для реализации и постпуление услуг и товаров"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000/api"
+    }
+  ],
+  "paths": {
+    "/users": {
+      "$ref": "./users/users.json#/getUsers"
+    },
+    "/users/{id}": {
+      "$ref": "./users/users.json#/userById"
+    }
+  },
+  "components": {
+    "schemas": {
+      "User": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Идентификатор пользователя"
+          },
+          "username": {
+            "type": "string",
+            "description": "Имя пользователя"
+          },
+          "email": {
+            "type": "string",
+            "description": "Электронная почта пользователя"
+          },
+          "password": {
+            "type": "string",
+            "description": "Пароль пользователя"
+          }
+        },
+        "required": ["username", "email", "password"]
+      }
+    }
+  }
+}

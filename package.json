@@ -5,7 +5,7 @@
   "scripts": {
     "build": "tsc",
     "start": "node dist/app.js",
-    "dev": "nodemon --watch src --watch docs/swagger.yaml --exec ts-node src/index.ts"
+    "dev": "nodemon --watch src --watch docs/swagger.json --exec ts-node src/index.ts"
   },
   "author": "",
   "license": "ISC",
