@@ -7,142 +7,104 @@ servers:
   - url: http://localhost:3000/api
 
 paths:
+
   /users:
-    get:
-      summary: Получить всех пользователей
-      description: Возвращает список всех пользователей.
-      operationId: getAllUsers
-      tags:
-        - Users
-      responses:
-        '200':
-          description: Список пользователей
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/User'
-
-    get:
-      summary: Получить пользователей
-      description: Возвращает список пользователей или одного пользователя по ID.
-      operationId: getUsers
-      tags:
-        - Users
-      parameters:
-        - name: id
-          in: query
-          description: ID пользователя (необязательный)
-          required: false
-          schema:
-            type: integer
-      responses:
-        '200':
-          description: Список пользователей или один пользователь
-          content:
-            application/json:
-              schema:
-                oneOf:
-                  - type: array
-                    items:
-                      $ref: '#/components/schemas/User'
-                  - $ref: '#/components/schemas/User'
-        '404':
-          description: Пользователь не найден
-
+    $ref: '/users/users.yaml#/getUsers'
 
   /users/{id}:
-    get:
-      summary: Получить пользователя по ID
-      description: Возвращает пользователя по заданному ID.
-      operationId: getUserById
-      tags:
-        - Users
-      parameters:
-        - name: id
-          in: path
-          description: ID пользователя
-          required: true
-          schema:
-            type: integer
-      responses:
-        '200':
-          description: Пользователь найден
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/User'
-        '404':
-          description: Пользователь не найден
+    $ref: '/users/users.yaml#/userById'
 
-    put:
-      summary: Обновить данные пользователя
-      description: Обновляет данные пользователя по заданному ID.
-      operationId: updateUser
-      tags:
-        - Users
-      parameters:
-        - name: id
-          in: path
-          description: ID пользователя
-          required: true
-          schema:
-            type: integer
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/User'
-      responses:
-        '200':
-          description: Данные пользователя обновлены
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/User'
-        '404':
-          description: Пользователь не найден
-
-    delete:
-      summary: Удалить пользователя
-      description: Удаляет пользователя по заданному ID.
-      operationId: deleteUser
-      tags:
-        - Users
-      parameters:
-        - name: id
-          in: path
-          description: ID пользователя
-          required: true
-          schema:
-            type: integer
-      responses:
-        '200':
-          description: Пользователь удален
-        '404':
-          description: Пользователь не найден
-
-    post:
-      summary: Создать нового пользователя
-      description: Создает нового пользователя в базе данных.
-      operationId: createUser
-      tags:
-        - Users
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/User'
-      responses:
-        '201':
-          description: Пользователь успешно создан
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/User'
+#  /users/{id}:
+#    get:
+#      summary: Получить пользователя по ID
+#      description: Возвращает пользователя по заданному ID.
+#      operationId: getUserById
+#      tags:
+#        - Users
+#      parameters:
+#        - name: id
+#          in: path
+#          description: ID пользователя
+#          required: true
+#          schema:
+#            type: integer
+#      responses:
+#        '200':
+#          description: Пользователь найден
+#          content:
+#            application/json:
+#              schema:
+#                $ref: '#/components/schemas/User'
+#        '404':
+#          description: Пользователь не найден
+#
+#    put:
+#      summary: Обновить данные пользователя
+#      description: Обновляет данные пользователя по заданному ID.
+#      operationId: updateUser
+#      tags:
+#        - Users
+#      parameters:
+#        - name: id
+#          in: path
+#          description: ID пользователя
+#          required: true
+#          schema:
+#            type: integer
+#      requestBody:
+#        required: true
+#        content:
+#          application/json:
+#            schema:
+#              $ref: '#/components/schemas/User'
+#      responses:
+#        '200':
+#          description: Данные пользователя обновлены
+#          content:
+#            application/json:
+#              schema:
+#                $ref: '#/components/schemas/User'
+#        '404':
+#          description: Пользователь не найден
+#
+#    delete:
+#      summary: Удалить пользователя
+#      description: Удаляет пользователя по заданному ID.
+#      operationId: deleteUser
+#      tags:
+#        - Users
+#      parameters:
+#        - name: id
+#          in: path
+#          description: ID пользователя
+#          required: true
+#          schema:
+#            type: integer
+#      responses:
+#        '200':
+#          description: Пользователь удален
+#        '404':
+#          description: Пользователь не найден
+#
+#    post:
+#      summary: Создать нового пользователя
+#      description: Создает нового пользователя в базе данных.
+#      operationId: createUser
+#      tags:
+#        - Users
+#      requestBody:
+#        required: true
+#        content:
+#          application/json:
+#            schema:
+#              $ref: '#/components/schemas/User'
+#      responses:
+#        '201':
+#          description: Пользователь успешно создан
+#          content:
+#            application/json:
+#              schema:
+#                $ref: '#/components/schemas/User'
 
 components:
   schemas:
