@@ -25,6 +25,35 @@ paths:
                   $ref: '#/components/schemas/User'
 
     get:
+      summary: Получить пользователей
+      description: Возвращает список пользователей или одного пользователя по ID.
+      operationId: getUsers
+      tags:
+        - Users
+      parameters:
+        - name: id
+          in: query
+          description: ID пользователя (необязательный)
+          required: false
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Список пользователей или один пользователь
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - type: array
+                    items:
+                      $ref: '#/components/schemas/User'
+                  - $ref: '#/components/schemas/User'
+        '404':
+          description: Пользователь не найден
+
+
+  /users/{id}:
+    get:
       summary: Получить пользователя по ID
       description: Возвращает пользователя по заданному ID.
       operationId: getUserById
@@ -114,6 +143,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/User'
+
 components:
   schemas:
     User:
