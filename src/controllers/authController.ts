@@ -1,21 +1,16 @@
 // src/controllers/userController.ts
 
 import { Request, Response } from 'express';
-import {
-    getAllUserService,
-    getUserService,
-    createUserService,
-    updateUserService,
-    deleteUserService
-} from '../services/userService';
+import { checkCredentails } from "../services/userService"
+import {jwtService} from "../application/jwt-service";
 
 // Получить всех пользователей
 export const authenticate = async (req: Request, res: Response) => {
-    // const { id } = req.params;
-    // const user = await getAllUserService();
-    // if (user) {
-        res.status(200).json('jusup');
-    // } else {
-    //     res.status(404).json({ message: 'User not found' });
-    // }
+    const user = await checkCredentails(req.body.userName, req.body.password);
+    if (user) {
+        const token = await jwtService.createJWT(user)
+        res.status(201).send(token)
+    } else {
+        res.status(404).json({ message: 'User not found' });
+    }
 };

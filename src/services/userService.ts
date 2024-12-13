@@ -1,35 +1,39 @@
 // src/services/userService.ts
-
 import { User } from '../types/user';
-import {
-    getUserById,
-    getAllUsers,
-    createUser,
-    updateUser,
-    deleteUser
-} from '../repositories/userRepository';
+const bcrypt = require('bcrypt');
+import { userRepository } from '../repositories/userRepository';
 
 // Получить пользователя по ID
-export const getAllUserService = async (): Promise<User[]> => {
-    return getAllUsers();
-};
+export const userService = {
+    async getAllUserService (): Promise<User[]> {
+        return userRepository.getAllUsers();
+    },
 
-// Получить пользователя по ID
-export const getUserService = async (id: number): Promise<User | undefined> => {
-    return getUserById(id);
-};
+    // Получить пользователя по ID
+    async getUserService (id: number): Promise<User | undefined> {
+        return userRepository.getUserById(id);
+    },
 
-// Создать нового пользователя
-export const createUserService = async (userData: User): Promise<User> => {
-    return createUser(userData);
-};
 
-// Обновить данные пользователя
-export const updateUserService = async (id: number, updateData: Partial<User>): Promise<User | undefined> => {
-    return updateUser(id, updateData);
-};
+    // Создать нового пользователя
+    async createUserService (userData: User): Promise<User> {
+        const passwordSalt = await bcrypt.genSalt(10)
+        // const passwordHash = await this_
 
-// Удалить пользователя
-export const deleteUserService = async (id: number): Promise<boolean> => {
-    return deleteUser(id);
-};
+        return userRepository.createUser(userData);
+    },
+
+    // Обновить данные пользователя
+    async updateUserService (id: number, updateData: Partial<User>): Promise<User | undefined> {
+        return userRepository.updateUser(id, updateData);
+    },
+
+    // Удалить пользователя
+    async deleteUserService (id: number): Promise<boolean> {
+        return userRepository.deleteUser(id);
+    },
+
+    async checkCredentails () {
+
+    }
+}
