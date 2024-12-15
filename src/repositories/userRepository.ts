@@ -17,10 +17,10 @@ export const userRepository = {
 
     // Создать нового пользователя
     async createUser (userData: User): Promise<User> {
-        const { username, email, password } = userData;
+        const { username, email, password, passwordSalt } = userData;
         const result = await db.query(
-            'INSERT INTO users (username, email, password) VALUES ($1, $2, $3) RETURNING *',
-            [username, email, password]
+            'INSERT INTO users (username, email, password, passwordSalt) VALUES ($1, $2, $3 $4) RETURNING *',
+            [username, email, password, passwordSalt]
         );
         return result[0]; // Возвращаем добавленного пользователя
     },
@@ -39,5 +39,15 @@ export const userRepository = {
     async deleteUser (id: number): Promise<boolean> {
         const result = await db.query('DELETE FROM users WHERE id = $1', [id]);
         return result.rowCount > 0; // Вернет true, если удаление успешно
+    },
+
+    async findByLoginOrEmail(loginOrEmail: string): Promise<User | null> {
+        try {
+            const result = await db.oneOrNone('SELECT * FROM users WHERE username = $1 OR email = $1', [loginOrEmail]);
+            return result ? result : null;
+        } catch (error) {
+            throw new Error('Error fetching user by login or email');
+        }
     }
+
 }

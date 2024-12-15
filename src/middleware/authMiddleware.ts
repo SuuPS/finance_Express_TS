@@ -1,18 +1,21 @@
 import { Request, Response, NextFunction } from 'express';
-import { verifyToken } from '../utils/jwtHelper';
+import {userService} from "../services/userService";
+import {jwtService} from "../application/jwt-service";
 
-export const authenticateJWT = (req: Request, res: Response, next: NextFunction) => {
-    const token = req.headers['authorization']?.split(' ')[1];
-
-    if (!token) {
-        return res.status(401).json({ message: 'Access denied. No token provided.' });
+export const authMiddleware = async (req: Request, res: Response, next: NextFunction) => {
+    if (!req.headers.authorization){
+        res.send(401)
+        return
     }
 
-    const decoded = verifyToken(token);
-    if (!decoded) {
-        return res.status(403).json({ message: 'Invalid token.' });
+    const token = req.headers.authorization.split(' ')[1]
+
+    const userId = await jwtService.getUserIdByToken(token)
+    if (userId){
+        req.user = await userService.getUserService(userId)
+        next()
     }
 
-    req.user = decoded; // Attach decoded user to the request object
-    next();
+    res.send(401)
+    next()
 };
