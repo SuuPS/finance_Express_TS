@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 import { jwtService } from '../application/jwt-service';
 import { userService } from '../services/userService'; // Assuming you have this
 
-export const authMiddleware = async (req: Request, res: Response, next: NextFunction) => {
+export const authMiddleware = async (req: any, res: any, next: NextFunction) => {
     const authHeader = req.headers.authorization;
 
     // Check if authorization header is missing
