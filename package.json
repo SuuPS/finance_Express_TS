@@ -1,11 +1,13 @@
 {
   "name": "finance_express_back_ts",
   "version": "1.0.0",
+  "type": "module",
   "main": "index.js",
   "scripts": {
     "build": "tsc",
     "start": "node dist/app.js",
-    "dev": "nodemon --watch src --watch docs/swagger.json --exec ts-node src/index.ts"
+    "dev": "nodemon --watch src --watch docs/swagger.json --exec ts-node --loader ts-node/esm src/index.ts",
+    "debug": "nodemon --inspect --watch src --watch docs/swagger.json --exec node --inspect --loader ts-node/esm src/index.ts"
   },
   "author": "",
   "license": "ISC",

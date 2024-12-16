@@ -16,12 +16,15 @@ export const userRepository = {
     },
 
     // Создать нового пользователя
-    async createUser (userData: User): Promise<User> {
+    async createUser(userData: User): Promise<User> {
         const { username, email, password, passwordSalt } = userData;
+
+        // Исправленный SQL-запрос с запятой между $3 и $4
         const result = await db.query(
-            'INSERT INTO users (username, email, password, passwordSalt) VALUES ($1, $2, $3 $4) RETURNING *',
+            'INSERT INTO users (username, email, password, passwordSalt) VALUES ($1, $2, $3, $4) RETURNING *',
             [username, email, password, passwordSalt]
         );
+
         return result[0]; // Возвращаем добавленного пользователя
     },
 

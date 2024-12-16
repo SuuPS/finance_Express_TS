@@ -1,17 +1,13 @@
 {
   "compilerOptions": {
+    "module": "ESNext",       // Используем ESNext для модуля
+    "target": "ES2020",       // Можно использовать ES2020 или более позднюю версию
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "outDir": "./dist",
     "typeRoots": ["node_modules/@types", "src/types"],
     "types": ["node", "express"],
-    "strict": true,
-    "module": "commonjs",
-    "target": "es2020",
-    "outDir": "./dist",
-    "esModuleInterop": true,
-    "resolveJsonModule": true
+    "strict": true
   },
-  "include": ["src/**/*.ts", "global.d.ts",  "src/types/**/*.d.ts"],
-//  "include": [
-//    "src/**/*.ts",
-//    "src/types/**/*.d.ts"
-//  ]
+  "include": ["src/**/*.ts", "global.d.ts", "src/types/**/*.d.ts"]
 }
