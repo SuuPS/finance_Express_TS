@@ -1,9 +1,9 @@
-// src/index.ts
+import 'source-map-support/register';
 import express from 'express';
 import bodyParser from 'body-parser';
-import routes from './routes';
+import routes from './routes'; // без .ts, так как это будет разрешено TypeScript
 import swaggerUi from 'swagger-ui-express';
-const swaggerDocument = require('../docs/swagger.json');
+import swaggerDocument from '../docs/swagger.json'; // также используем import для swagger.json
 
 const index = express();
 const PORT = process.env.PORT || 3000;
@@ -14,7 +14,7 @@ index.use(bodyParser.json());
 // Используем маршруты
 index.use('/api', routes);
 
-// Настраиваем Swagger UI
+// Настроим Swagger UI
 index.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 index.listen(PORT, () => {
