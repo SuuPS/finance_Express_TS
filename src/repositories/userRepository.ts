@@ -46,8 +46,7 @@ export const userRepository = {
 
     async findByLoginOrEmail(loginOrEmail: string): Promise<User | null> {
         try {
-            const result = await db.oneOrNone('SELECT * FROM users WHERE username = $1 OR email = $1', [loginOrEmail]);
-            return result ? result : null;
+            return await db.oneOrNone('SELECT * FROM users WHERE username = $1 OR email = $1', [loginOrEmail]);
         } catch (error) {
             throw new Error('Error fetching user by login or email');
         }

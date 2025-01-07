@@ -41,6 +41,7 @@ export const userService = {
     },
 
     async _generateHash(password: string, salt: string): Promise<string> {
+        console.log(password, salt)
         try {
             const hash = await bcrypt.hash(password, salt);
             return hash;
